@@ -1,0 +1,7 @@
+photos/
+notebooks/temp_text.txt
+.env
+data/
+models/
+logs/
+week0-env/

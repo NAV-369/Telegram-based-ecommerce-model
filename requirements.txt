@@ -1,0 +1,7 @@
+datasets
+sentencepiece 
+amseg 
+pdf2image 
+pytesseract
+transformers
+emoji
