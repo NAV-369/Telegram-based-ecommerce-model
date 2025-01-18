@@ -1,62 +1,95 @@
-# Task 1: Data Ingestion and Data Preprocessing
+
+
+# Task 2: Label a Subset of Dataset in CoNLL Format
 
 ## Overview
-This project focuses on building a data ingestion and preprocessing pipeline to fetch and prepare messages from Ethiopian-based Telegram e-commerce channels. The goal is to collect raw data (including text, images, and documents) from selected Telegram channels, process the text data (especially focusing on Amharic), and structure the data for further analysis and entity extraction.
+In this task, you are tasked with labeling a portion of the provided dataset using the **CoNLL format**, which is commonly used for Named Entity Recognition (NER) tasks. The objective is to identify and label entities such as products, prices, and locations within Amharic text.
 
-### Objectives
-- **Data Ingestion**: Set up a system to fetch messages from Telegram e-commerce channels.
-- **Data Preprocessing**: Process and clean the raw data, handling text, images, and documents.
-- **Preparation for Entity Extraction**: Convert the raw data into a structured format, preparing it for further analysis.
+## Objective
+- **Labeling Entities**: Label the dataset for specific entity types such as product names, price, and location.
+- **CoNLL Format**: The labeled data should follow the **CoNLL format** for NER tasks.
+- **Textual Data**: Use the "Message" column of the provided dataset, which contains text describing various products and entities.
 
 ---
 
-## Steps
+## CoNLL Format
 
-### 1. Identify and Connect to Relevant Telegram Channels
-- **Objective**: Identify at least five Ethiopian-based e-commerce channels.
-- **Action**: Use a custom scraper to connect to Telegram and fetch data from the selected channels.
-- You may use the **Telethon** or **python-telegram-bot** libraries for interacting with Telegram.
-  
-### 2. Implement Message Ingestion System
-- **Objective**: Collect text, images, and documents posted in real-time.
-- **Action**: Set up a system that listens for new messages from the selected channels and fetches the content (text, images, documents) as soon as they are posted.
-  
-### 3. Preprocess Text Data
-- **Objective**: Tokenize, normalize, and handle Amharic-specific linguistic features.
-- **Action**: 
-  - **Tokenization**: Break the text into words or sentences.
-  - **Normalization**: Convert text to lowercase, remove punctuation, stopwords, and perform stemming/lemmatization.
-  - **Amharic-specific handling**: Ensure that tokenization and text normalization work for Amharic, which may require specialized handling for diacritics, characters, and script.
+Each line in the CoNLL format should represent a token (word) from the text. Each token should be followed by its corresponding entity label. 
 
-### 4. Clean and Structure the Data
-- **Objective**: Prepare the data in a unified format.
-- **Action**:
-  - **Separate Metadata**: Extract and structure metadata such as the sender, timestamp, and message type (text, image, document).
-  - **Message Content**: Clean and separate the actual message content (text or media) from the metadata.
-  
-### 5. Store Preprocessed Data
-- **Objective**: Store the cleaned and structured data for future analysis.
-- **Action**: 
-  - Store the processed data in a structured format such as **CSV**, **JSON**, or a **database**.
-  - Ensure that data is accessible and easy to query for further analysis, such as entity extraction.
+### Format:
+1. **Each token (word)** is labeled on its own line.
+2. **The token is followed by its entity label** (e.g., `B-Product`, `I-Product`).
+3. **Blank lines** separate individual sentences/messages.
+
+### Entity Types:
+- **B-Product**: The beginning of a product entity (e.g., "Baby bottle").
+- **I-Product**: Inside a product entity (e.g., the word "bottle" in "Baby bottle").
+- **B-LOC**: The beginning of a location entity (e.g., "Addis Abeba", "Bole").
+- **I-LOC**: Inside a location entity (e.g., the word "Abeba" in “Addis Abeba”).
+- **B-PRICE**: The beginning of a price entity (e.g., "ዋጋ 1000 ብር", "በ 100 ብር").
+- **I-PRICE**: Inside a price entity (e.g., the word "1000" in “ዋጋ 1000 ብር”).
+- **O**: Tokens that are outside any entities.
+
+### Example:
+Here is an example of how you should label a sentence in CoNLL format:
+
+የቤት እቃ      O
+የግምት ቦታ  B-LOC
+በአዲስ አበባ    I-LOC
+እቃ በተለዋዋጭ  B-Product
+ቤት አሞሌ      I-Product
+በተለዋዋጭ 1000 ብር   B-PRICE
+
+In this example:
+- "የቤት እቃ" is labeled as a product entity (B-Product).
+- "ቦታ" is labeled as a location entity (B-LOC).
+- "1000 ብር" is labeled as a price entity (B-PRICE).
 
 ---
 
 ## Requirements
 
-- **Programming Language**: Python
-- **Libraries**:
-  - `telethon` or `python-telegram-bot` for Telegram API interaction.
-  - `nltk` or `spacy` for text processing.
-  - `pandas` or `json` for data storage and manipulation.
-  
+1. **Labeling Dataset**:
+   - You need to label **at least 30-50 messages** from the provided dataset's "Message" column.
+   
+2. **Save the Labeled Data**:
+   - Save your labeled data in a **plain text file** in the CoNLL format.
+
+3. **Text Processing**:
+   - Use the provided dataset and focus on identifying product names, locations, and prices within the Amharic text.
+   
 ---
 
-## Setup Instructions
+## Instructions
 
-### 1. Clone the Repository
+1. **Prepare Your Environment**:
+   - Ensure you have the dataset available, particularly the "Message" column containing Amharic text.
+   
+2. **Labeling**:
+   - Carefully read through each message in the dataset and identify the entities (products, prices, locations).
+   - Label the entities as per the CoNLL format.
 
-```bash
-git clone https://github.com/your-repository.git
-cd your-repository
+3. **Save Your Work**:
+   - After labeling each message, save the results in a text file using the CoNLL format.
+   
+---
 
+## Submission
+
+- **File Format**: Ensure that the labeled data is saved in **plain text format** with a `.txt` extension.
+- **Submit**: Submit the labeled file for review and further processing.
+
+---
+
+## Notes
+
+- This task is critical for the preparation of data used in training a Named Entity Recognition (NER) model.
+- The labeled data will be used for identifying and extracting specific entities in Amharic text related to e-commerce.
+
+---
+
+## Contribution Guidelines
+- Please ensure that all data is labeled consistently according to the provided entity categories.
+- If you encounter any unclear cases, please annotate them as `O` (outside any entity) or leave a note in the labeled file for clarification.
+
+This markdown README will guide the user through the process of labeling the dataset in CoNLL format. You can copy and paste this into your project’s README file for clear instructions.
